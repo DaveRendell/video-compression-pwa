@@ -1,5 +1,6 @@
 import * as React from "react"
 import FileUploader from "./fileUploader"
+import VideoProcessor from "./videoProcessor"
 
 export default function App() {
   const [sourceVideoFile, setSourceVideoFile] = React.useState<File | null>(null)
@@ -7,7 +8,9 @@ export default function App() {
   return (
     <>
       <h1>Squishie</h1>
-      <FileUploader setSourceVideoFile={setSourceVideoFile}/>
+      { !sourceVideoFile
+          ? <FileUploader setSourceVideoFile={setSourceVideoFile}/>
+          : <VideoProcessor sourceFile={sourceVideoFile} /> }
     </>
   )
 }
