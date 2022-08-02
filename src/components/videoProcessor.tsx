@@ -3,9 +3,10 @@ import transcode from "../transcode"
 
 interface Props {
   sourceFile: File
+  reset: () => void
 }
 
-export default function VideoProcessor({ sourceFile }: Props) {
+export default function VideoProcessor({ sourceFile, reset }: Props) {
   const [progress, setProgress] = React.useState(0.0)
   const [videoUrl, setVideoUrl] = React.useState<string | null>(null)
   const [error, setError] = React.useState<string | null>(null)
@@ -34,9 +35,16 @@ export default function VideoProcessor({ sourceFile }: Props) {
 
   const fileName = `small-${sourceFile.name}`
 
-  return <article>
-    Transcoding complete
-    <video controls src={videoUrl} />
-    <a href={videoUrl} title={fileName} download={fileName}>Save</a>
-  </article>  
+  return (
+    <>
+      <article>
+        Transcoding complete
+        <video controls src={videoUrl} />
+        <a href={videoUrl} title={fileName} download={fileName}>Save</a>
+        
+      </article>
+      <button onClick={reset}>Squish another video</button>  
+    </>
+  )
+    
 }
